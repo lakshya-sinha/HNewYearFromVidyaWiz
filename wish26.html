@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Happy New Year 2026 | Vidya Wiz Classes</title>
+
+<style>
+:root {
+  --bg-dark: #4b0f0f;
+  --bg-light: #7a1b1b;
+  --gold: #facc15;
+  --gold-soft: #fde68a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: radial-gradient(circle at top, var(--bg-light), var(--bg-dark));
+  overflow: hidden;
+  color: #fff7e6;
+}
+
+canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+/* CONTENT */
+.wrapper {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.card {
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+}
+
+/* BRAND HEADING */
+.brand {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--gold);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  text-shadow:
+    0 0 12px rgba(250,204,21,0.8),
+    0 0 30px rgba(250,204,21,0.6);
+  animation: glow 2.5s ease-in-out infinite alternate;
+}
+
+.brand-line {
+  width: 140px;
+  height: 3px;
+  margin: 10px auto 18px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  box-shadow: 0 0 10px var(--gold);
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px rgba(250,204,21,0.6); }
+  to   { text-shadow: 0 0 24px rgba(250,204,21,1); }
+}
+
+.diya {
+  font-size: 3.2rem;
+  margin-bottom: 6px;
+  filter: drop-shadow(0 0 14px gold);
+}
+
+.year {
+  font-size: 3.6rem;
+  font-weight: 900;
+  color: var(--gold);
+  text-shadow: 0 0 24px rgba(250,204,21,0.9);
+  margin-bottom: 18px;
+}
+
+.message-box {
+  border: 1px solid rgba(250,204,21,0.5);
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 22px;
+  background: rgba(0,0,0,0.18);
+  box-shadow:
+    inset 0 0 22px rgba(250,204,21,0.2),
+    0 0 20px rgba(0,0,0,0.3);
+}
+
+.message {
+  font-size: 1.3rem;
+  line-height: 1.75;
+  color: var(--gold-soft);
+  font-weight: 600;
+}
+
+.english {
+  margin-top: 14px;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.celebrate {
+  font-size: 1.8rem;
+  margin: 16px 0;
+}
+
+.footer {
+  margin-top: 26px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* MOBILE */
+@media (max-width: 360px) {
+  .brand { font-size: 2rem; }
+  .year { font-size: 3rem; }
+  .message { font-size: 1.15rem; }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="effects"></canvas>
+
+<div class="wrapper">
+  <div class="card">
+
+    <div class="brand">Vidya Wiz Classes</div>
+    <div class="brand-line"></div>
+
+    <div class="diya">🪔</div>
+
+    <div class="year">2026</div>
+
+    <div class="message-box">
+      <div class="message">
+        आप सभी को नववर्ष 2026 के<br />
+        शुभ अवसर पर<br />
+        मंगलमय शुभकामनाएं
+      </div>
+
+      <div class="english">
+        Wishing you all a prosperous and blessed New Year 2026
+      </div>
+    </div>
+
+    <div class="celebrate">✨🎉✨</div>
+
+    <div class="footer">
+      From the team at <b>Vidya Wiz Classes</b><br />
+      Created by <b>Lakshya</b>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById("effects");
+const ctx = canvas.getContext("2d");
+
+let w, h;
+function resize() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resize);
+resize();
+
+/* FIREWORKS */
+let fireworks = [];
+
+function createFirework() {
+  const x = Math.random() * w;
+  const y = Math.random() * (h * 0.45) + 80;
+
+  for (let i = 0; i < 60; i++) {
+    fireworks.push({
+      x,
+      y,
+      r: Math.random() * 2.2 + 1,
+      dx: (Math.random() - 0.5) * 5,
+      dy: (Math.random() - 0.5) * 5,
+      life: 70,
+      alpha: 1
+    });
+  }
+}
+
+/* BURSTS ON LOAD */
+for (let i = 0; i < 5; i++) {
+  setTimeout(createFirework, i * 550);
+}
+
+/* DIWALI SPARKLES */
+let sparks = [];
+for (let i = 0; i < 120; i++) {
+  sparks.push({
+    x: Math.random() * w,
+    y: Math.random() * h,
+    r: Math.random() * 2.2 + 0.6,
+    dy: Math.random() * 0.8 + 0.4,
+    a: Math.random() * 0.7 + 0.2
+  });
+}
+
+function animate() {
+  ctx.clearRect(0, 0, w, h);
+
+  sparks.forEach(s => {
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(250,204,21,${s.a})`;
+    ctx.fill();
+    s.y -= s.dy;
+    if (s.y < 0) s.y = h;
+  });
+
+  fireworks.forEach((p, i) => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(250,204,21,${p.alpha})`;
+    ctx.fill();
+
+    p.x += p.dx;
+    p.y += p.dy;
+    p.life--;
+    p.alpha -= 0.014;
+
+    if (p.life <= 0) fireworks.splice(i, 1);
+  });
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+
+</body>
+</html>
